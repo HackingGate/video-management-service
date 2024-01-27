@@ -4,6 +4,13 @@
     <title>Video Management Service</title>
     <!-- Include hls.js from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        video {
+            width: 100%; /* This will make the video player take up all the horizontal space of its container */
+            max-width: 640px; /* You can set a max-width to ensure it doesn't get too large on bigger screens */
+            height: auto; /* This will maintain the aspect ratio of the video */
+        }
+    </style>
 </head>
 <body>
     <h1>Video Management</h1>
@@ -17,32 +24,26 @@
     <h2>Available Videos</h2>
     <ul>
         {% for video in videos %}
-            <li>
-                {{ video }}
-                - <a href="{{ url_for('video', filename=video) }}">View</a>
-                - <a href="{{ url_for('delete_file', filename=video) }}">Delete</a>
-                <br>
-                <video id="video_{{ loop.index }}" controls></video>
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        var video = document.getElementById('video_{{ loop.index }}');
-                        var videoSrc = "{{ url_for('video', filename=video) }}";
-                        if (Hls.isSupported()) {
-                            var hls = new Hls();
-                            hls.loadSource(videoSrc);
-                            hls.attachMedia(video);
-                            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                                video.play();
-                            });
-                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                            video.src = videoSrc;
-                            video.addEventListener('loadedmetadata', function() {
-                                video.play();
-                            });
-                        }
-                    });
-                </script>
-            </li>
+            <video id="video_{{ loop.index }}" controls></video>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var video = document.getElementById('video_{{ loop.index }}');
+                    var videoSrc = "{{ url_for('video', filename=video) }}";
+                    if (Hls.isSupported()) {
+                        var hls = new Hls();
+                        hls.loadSource(videoSrc);
+                        hls.attachMedia(video);
+                        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                            video.play();
+                        });
+                    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                        video.src = videoSrc;
+                        video.addEventListener('loadedmetadata', function() {
+                            video.play();
+                        });
+                    }
+                });
+            </script>
         {% endfor %}
     </ul>
 </body>
