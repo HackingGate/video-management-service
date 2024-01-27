@@ -34,9 +34,10 @@ def upload_file():
         output_m3u8 = os.path.splitext(file_path)[0] + '.m3u8'
         segment_prefix = os.path.splitext(file_path)[0] + '_segment'
         ffmpeg_command = [
-            'ffmpeg', '-i', file_path, '-c:v', 'libx265', '-crf', '28', '-sc_threshold', '0', '-g', '48',
-            '-keyint_min', '48', '-hls_time', '10', '-hls_playlist_type', 'vod', '-b:v', '2000k', '-maxrate', '2147k',
-            '-bufsize', '2000k', '-b:a', '128k', '-hls_segment_filename', f"{segment_prefix}%03d.ts", output_m3u8
+            'ffmpeg', '-i', file_path, '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-sc_threshold', '0', '-g',
+            '48', '-keyint_min', '48', '-hls_time', '10', '-hls_playlist_type', 'vod', '-b:v', '2000k', '-maxrate',
+            '2147k', '-bufsize', '2000k', '-b:a', '128k', '-hls_segment_filename', f"{segment_prefix}%03d.ts",
+            output_m3u8
         ]
         subprocess.run(ffmpeg_command)
 
