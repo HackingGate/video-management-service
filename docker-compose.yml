@@ -6,6 +6,6 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /mnt/Unlimited/Media/Shared:/mnt/media-volume
+      - ${MEDIA_VOLUME_PATH}:/mnt/media-volume
     environment:
       - UPLOAD_FOLDER=/mnt/media-volume
