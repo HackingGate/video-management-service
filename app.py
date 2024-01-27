@@ -8,11 +8,13 @@ app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', '.')
 
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 * 1024  # 1GB max-limit.
 
+
 # Home page route
 @app.route('/')
 def index():
     videos = os.listdir(app.config['UPLOAD_FOLDER'])
     return render_template('index.html', videos=videos)
+
 
 # Upload video route
 @app.route('/upload', methods=['POST'])
@@ -27,16 +29,19 @@ def upload_file():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return redirect(url_for('index'))
 
+
 # Delete video route
 @app.route('/delete/<filename>')
 def delete_file(filename):
     os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     return redirect(url_for('index'))
 
+
 # Route for serving videos
 @app.route('/video/<filename>')
 def video(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 if __name__ == '__main__':
     app.run(
