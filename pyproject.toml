@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "video-management-service"
+version = "0.1.0"
+description = ""
+authors = ["HackingGate <8541644+HackingGate@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "video_management_service"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
