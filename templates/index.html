@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Video Management Service</title>
 </head>
@@ -7,9 +7,9 @@
     <h1>Video Management</h1>
 
     <h2>Upload a Video</h2>
-    <form method=post enctype=multipart/form-data action="{{ url_for('upload_file') }}">
-        <input type=file name=file>
-        <input type=submit value=Upload>
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
     </form>
 
     <h2>Available Videos</h2>
@@ -19,6 +19,11 @@
                 {{ video }}
                 - <a href="{{ url_for('video', filename=video) }}">View</a>
                 - <a href="{{ url_for('delete_file', filename=video) }}">Delete</a>
+                <br>
+                <video width="320" height="240" controls>
+                    <source src="{{ url_for('video', filename=video) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </li>
         {% endfor %}
     </ul>

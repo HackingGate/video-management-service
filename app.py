@@ -4,15 +4,15 @@ import os
 
 app = Flask(__name__)
 # Use the environment variable for UPLOAD_FOLDER if it's set, otherwise default to a local folder
-app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', '.')
-
+app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', './test-video')
 app.config['MAX_CONTENT_LENGTH'] = 1 * 1024 * 1024 * 1024  # 1GB max-limit.
 
 
 # Home page route
 @app.route('/')
 def index():
-    videos = os.listdir(app.config['UPLOAD_FOLDER'])
+    # list all videos in the UPLOAD_FOLDER, filter out non-video files
+    videos = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if f.endswith(('.mp4', '.mkv', '.mov', '.webm'))]
     return render_template('index.html', videos=videos)
 
 
