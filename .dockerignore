@@ -1,0 +1,44 @@
+# Version control
+.git/
+.gitignore
+
+# Development tools configuration
+.vscode/
+.idea/
+
+# Python bytecode and virtualenvs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+ENV/
+
+# Test files and directories
+tests/
+*.log
+*.csv
+
+# Development scripts
+download-test-video.sh
+
+# Dependency files (handled by Docker build process)
+poetry.lock
+pyproject.toml
+
+# Continuous Integration and Continuous Deployment
+.circleci/
+.travis.yml
+.gitlab-ci.yml
+Jenkinsfile
+
+# Miscellaneous files
+*.md
+LICENSE
+Makefile
+.dockerignore
+Dockerfile
+docker-compose.yml
+renovate.json
