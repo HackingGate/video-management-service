@@ -24,10 +24,6 @@ tests/
 # Development scripts
 download-test-video.sh
 
-# Dependency files (handled by Docker build process)
-poetry.lock
-pyproject.toml
-
 # Continuous Integration and Continuous Deployment
 .circleci/
 .travis.yml
